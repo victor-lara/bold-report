@@ -1,0 +1,10 @@
+<bold-reportviewer 
+    id="reportviewer-container"
+    [reportServiceUrl]="serviceUrl"
+    [reportPath]="reportPath"
+    (reportLoaded)="onReportLoaded($event)"
+    (beforeRender)="onBeforeRender($event)"
+    [processingMode]="processingMode"
+    [serviceAuthorizationToken]="authToken">
+</bold-reportviewer>
+<!-- [reportServerUrl]="serverUrl" -->
