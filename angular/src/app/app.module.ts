@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiInterceptor } from './../app/common/api.interceptor';
 
 import './../globals';
 
@@ -23,7 +25,9 @@ import '@boldreports/javascript-reporting-controls/Scripts/v2.0/bold.report-view
     AppRoutingModule,
     BoldReportViewerModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
