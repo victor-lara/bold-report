@@ -1,0 +1,52 @@
+embed key
+yJgcJrbyjY1ibbHmUF6eWoyBiWHzdF5Z
+
+
+dashboard properties
+ dashboardId?: string;
+    dashboardPath?: string;
+    datasourceId?: string;
+    datasourceName?: string;
+    embedContainerId?: string;
+    viewId?: string;
+    viewName?: string;
+    nonce?: string;
+    filterParameters?: string;
+    height?: string;
+    width?: string;
+    token?: string;
+    embedToken?: string;
+    pinboardName?: string;
+    dashboardIds?: string[];
+    dashboardPaths?: string[];
+    anonymousToken?: IAnonymousToken;
+    datasources?: IDatasources[];
+    widgetList?: IWidgetList[];
+    expirationTime?: number;
+    scalingFactor?: number;
+    isRemoveStyle?: boolean;
+    isBingMapRequired?: boolean;
+    disableAutoRecover?: boolean;
+    restrictMobileView?: boolean;
+    embedType?: EmbedType;
+    environment?: Environment;
+    mode?: Mode;
+    theme?: Theme;
+    isMultiTabDashboard?: boolean;
+    localData?: ILocalData;
+    layoutSettings?: ILayoutSettings;
+    dashboardSettings?: IDashboardSettings;
+    widgetSettings?: IWidgetSettings;
+    dynamicConnection?: IDynamicConnection;
+    exportSettings?: IExportSettings;
+    authorizationServer?: IAuthorizationServer;
+    autoRefreshSettings?: IAutoRefreshSettings;
+    localeSettings?: ILocaleSettings;
+    languageSettings?: ILanguageSettings;
+    customBrandSettings?: ICustomBrandSettings;
+    toolbarSettings?: IToolbarSettings;
+    pinboardSettings?: IPinboardSettings;
+    designCanvasSettings?: IDesignCanvasSettings;
+    widgetContainerSettings?: IWidgetContainerSettings;
+    preConfiguredWidgets?: IPreConfiguredWidgets;
+    embedAiAssistant?: IEmbedAiAssistant;

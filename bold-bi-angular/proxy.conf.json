@@ -1,0 +1,11 @@
+{
+  "/bi": {
+    "target": "https://cloud.boldbi.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/bi": "/bi"
+    }
+  }
+}
