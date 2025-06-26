@@ -1,0 +1,14 @@
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    proxy: {
+      '/bi': {
+        target: 'https://cloud.boldbi.com',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/bi/, '/bi'),
+      },
+    },
+  },
+});

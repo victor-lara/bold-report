@@ -7,15 +7,16 @@ import {
 } from '@angular/core';
 import { BoldBIService } from './bold-bi.service';
 import { BoldBI } from '@boldbi/boldbi-embedded-sdk';
+import { sanitizeIdentifier } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
   template: ` <div id="dashboard-container"></div> `,
   styles: [
     `
-      .dashboard-container {
+      #dashboard-container {
         width: 100%;
-        height: 80vh;
+        height: 100%;
         min-height: 600px;
       }
       .loading,
@@ -31,53 +32,45 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild('dashboardContainer', { static: false }) container!: ElementRef;
   loading = true;
   error: string | null = null;
+  config = {
+    dashboardId: '04130fe8-2724-4476-8c3f-f3f715a6188f',
+    serverUrl: 'https://cloud.boldbi.com/bi',
+    siteIdentifier: 'site/b1907544',
+    environment: BoldBI.Environment.Enterprise,
+    embedType: BoldBI.EmbedType.Component,
+    widgetId: 'bd902fc4-f794-4082-81fd-e3cc63847a32',
+    authorizationServer: 'http://localhost:8080/embeddetail/get',
+  };
 
   constructor(private boldbiService: BoldBIService) {}
 
   ngAfterViewInit() {
+    //setTimeout(() => this.loadDashboard(), 1000);
     this.loadDashboard();
-  }
-
-  private validateConfig(config: any): boolean {
-    const stringProps = [
-      'serverUrl',
-      'dashboardId',
-      'embedToken',
-      'width',
-      'height',
-      'expirationTime',
-      'embedType',
-      'environment',
-    ];
-    return stringProps.every((prop) => {
-      const isValid =
-        typeof config[prop] === 'string' && config[prop].trim() !== '';
-      if (!isValid) {
-        console.error(`Invalid ${prop}:`, config[prop]);
-      }
-      return isValid;
-    });
   }
 
   async loadDashboard() {
     try {
-      const config = {
-        serverUrl: 'http://localhost:4200/bi', // Replace with your Bold BI server URL
-        dashboardId: '85244641-f2d6-4252-a4ee-f6ea8aaaa280', // Or use dashboardPath instead
-        embedContainerId: 'dashboard-container',
-        embedToken: 'yJgcJrbyjY1ibbHmUF6eWoyBiWHzdF5Z',
-        embedType: BoldBI.EmbedType.Component,
-        environment: BoldBI.Environment.Cloud,
-        proxyUrl: 'http://localhost:4200/bi',
-        token:
-          'zCXB6pL2HYZXBu4KSq5zwD0XbWYfHDqEx5Z+94zttKzM61RuLeieUDpA3Jq5cqKv4uslNE4rCeFxys/SHiZ1dnVOHBftiGO11k/pc2nAQ/4=',
+      const options = {
+        serverUrl: `${this.config.serverUrl}/${this.config.siteIdentifier}`, //Dashboard Server BI URL (ex: http://localhost:5000/bi/site/site1, http://dashboard.syncfusion.com/bi/site/site1)
+        dashboardId: this.config.dashboardId, //Item id of the dashboard in BI server.
+        embedContainerId: 'dashboard-container', // This should be the container id where you want to embed the dashboard.
+        embedType: this.config.embedType,
+        environment: this.config.environment, // If Cloud, you should use BoldBI.Environment.Cloud
+        mode: BoldBI.Mode.View,
+        height: '100%',
+        width: '100%',
+        widgetId: this.config.widgetId,
+        authorizationServer: {
+          url: this.config.authorizationServer, //Url of the GetDetails(API) in this application.
+        },
+        expirationTime: 100000, //Set the duration for the token to be alive.
       };
 
-      // if (!this.container?.nativeElement) {
-      //   throw new Error('Dashboard container not found');
-      // }
-
-      await this.boldbiService.initializeDashboard(config);
+      //await this.boldbiService.initializeDashboard(options);
+      const report = BoldBI.create(options);
+      //report.loadDashboard();
+      report.loadDashboardWidget('Grid2');
       this.loading = false;
     } catch (error) {
       console.error('Dashboard initialization failed:', error);

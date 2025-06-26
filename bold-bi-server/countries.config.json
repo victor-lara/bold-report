@@ -1,0 +1,10 @@
+{
+  "DashboardId": "04130fe8-2724-4476-8c3f-f3f715a6188f",
+  "ServerUrl": "https://cloud.boldbi.com/bi",
+  "UserEmail": "victorhugo.larasantillan@usfoods.com",
+  "EmbedSecret": "wjNA487cvcgGtPTgNh15ZNvYWj4IKl1Q",
+  "EmbedType": "component",
+  "Environment": "onpremise",
+  "ExpirationTime": "10000",
+  "SiteIdentifier": "site/b1907544"
+}
